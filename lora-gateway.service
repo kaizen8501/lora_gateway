@@ -1,0 +1,12 @@
+[Unit]
+Description=LoRa Gateway
+
+[Service]
+WorkingDirectory=/opt/lora-gateway/bin/
+ExecStart=/opt/lora-gateway/bin/start.sh
+SyslogIdentifier=lora-gateway
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
