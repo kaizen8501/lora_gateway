@@ -113,7 +113,8 @@ if [ "$REMOTE_CONFIG" = true ] ; then
 
 	popd
 else
-echo -e "{\n\t\"gateway_conf\": {\n\t\t\"gateway_ID\": \"$GATEWAY_EUI\",\n\t\t\"server_address\": \"222.98.173.208\", \n\t\"serv_port_up\": 1680, \n\t\"serv_port_down\": 1680, \n\t}\n}" >$LOCAL_CONFIG_FILE
+SERVER_IP=127.0.0.1
+echo -e "{\n\t\"gateway_conf\": {\n\t\t\"gateway_ID\": \"$GATEWAY_EUI\",\n\t\t\"server_address\": \"$SERVER_IP\", \n\t\"serv_port_up\": 1700, \n\t\"serv_port_down\": 1700\n\t}\n}" >$LOCAL_CONFIG_FILE
 fi
 
 popd
