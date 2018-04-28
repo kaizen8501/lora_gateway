@@ -87,7 +87,7 @@ popd
 # Symlink packet forwarder
 
 if [ ! -d bin ]; then mkdir bin; fi
-if [ -f ./bin/pkt_fwd ]; then rm ./bin/pkt_fwd; fi
+if [ -f ./bin/lora_pkt_fwd ]; then rm ./bin/lora_pkt_fwd; fi
 ln -s $INSTALL_DIR/packet_forwarder/lora_pkt_fwd/lora_pkt_fwd ./bin/lora_pkt_fwd
 cp -f ./packet_forwarder/lora_pkt_fwd/global_conf.json ./bin/global_conf.json
 
@@ -113,7 +113,7 @@ if [ "$REMOTE_CONFIG" = true ] ; then
 
 	popd
 else
-	echo -e "{\n\t\"gateway_conf\": {\n\t\t\"gateway_ID\": \"$GATEWAY_EUI\",\n\t\t\"servers\": [ { \"server_address\": \"router.eu.thethings.network\", \"serv_port_up\": 1700, \"serv_port_down\": 1700, \"serv_enabled\": true } ],\n\t\t\"ref_latitude\": $GATEWAY_LAT,\n\t\t\"ref_longitude\": $GATEWAY_LON,\n\t\t\"ref_altitude\": $GATEWAY_ALT,\n\t\t\"contact_email\": \"$GATEWAY_EMAIL\",\n\t\t\"description\": \"$GATEWAY_NAME\" \n\t}\n}" >$LOCAL_CONFIG_FILE
+echo -e "{\n\t\"gateway_conf\": {\n\t\t\"gateway_ID\": \"$GATEWAY_EUI\",\n\t\t\"server_address\": \"222.98.173.208\", \n\t\"serv_port_up\": 1680, \n\t\"serv_port_down\": 1680, \n\t}\n}" >$LOCAL_CONFIG_FILE
 fi
 
 popd
