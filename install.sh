@@ -30,22 +30,22 @@ fi
 # Request gateway configuration data
 # There are two ways to do it, manually specify everything
 # or rely on the gateway EUI and retrieve settings files from remote (recommended)
-#echo "Gateway configuration:"
+echo "Gateway configuration:"
+
+# Try to get gateway ID from MAC address
+# First try eth0, if that does not exist, try wlan0 (for RPi Zero)
+GATEWAY_EUI_NIC="eth0"
+if [[ `grep "$GATEWAY_EUI_NIC" /proc/net/dev` == "" ]]; then
+	GATEWAY_EUI_NIC="wlan0"
+fi
+
+if [[ `grep "$GATEWAY_EUI_NIC" /proc/net/dev` == "" ]]; then
+	echo "ERROR: No network interface found. Cannot set gateway ID."
+	exit 1
+fi
 #
-## Try to get gateway ID from MAC address
-## First try eth0, if that does not exist, try wlan0 (for RPi Zero)
-#GATEWAY_EUI_NIC="eth0"
-#if [[ `grep "$GATEWAY_EUI_NIC" /proc/net/dev` == "" ]]; then
-#	GATEWAY_EUI_NIC="wlan0"
-#fi
-#
-#if [[ `grep "$GATEWAY_EUI_NIC" /proc/net/dev` == "" ]]; then
-#	echo "ERROR: No network interface found. Cannot set gateway ID."
-#	exit 1
-#fi
-#
-#GATEWAY_EUI=$(ip link show $GATEWAY_EUI_NIC | awk '/ether/ {print $2}' | awk -F\: '{print $1$2$3"FFFE"$4$5$6}')
-#GATEWAY_EUI=${GATEWAY_EUI^^} # toupper
+GATEWAY_EUI=$(ip link show $GATEWAY_EUI_NIC | awk '/ether/ {print $2}' | awk -F\: '{print $1$2$3"FFFE"$4$5$6}')
+GATEWAY_EUI=${GATEWAY_EUI^^} # toupper
 
 
 # Install LoRaWAN packet forwarder repositories
